@@ -1,31 +1,29 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
-	"os"
 	"snake-ladder/game"
-	"strconv"
-	"strings"
+	"sync"
 )
 
 func main() {
-	scanner := bufio.NewScanner(os.Stdin)
+	manager := game.GetNewGameManager()
+	var wg sync.WaitGroup
 
-	fmt.Print("Enter the number of players")
-	scanner.Scan()
-	playerCountStr := scanner.Text()
-	playerCount, err := strconv.Atoi(strings.TrimSpace(playerCountStr))
-	if err != nil || playerCount <= 0 {
-		fmt.Println("Invalid number of players")
-		return
+	games := []*game.Game{
+		manager.NewGame(2, []string{"Alice", "Bob"}),
+		manager.NewGame(3, []string{"X", "Y", "Z"}),
+		manager.NewGame(2, []string{"Mohan", "Sohan"}),
 	}
-	names := make([]string, 0)
-	for i := 0; i < playerCount; i++ {
-		fmt.Printf("Enter name for player %d: ", i+1)
-		scanner.Scan()
-		names[i] = strings.TrimSpace(scanner.Text())
-	}
-	g := game.NewGame(playerCount, names)
 
+	wg.Add(len(games))
+
+	// Run them concurrently
+	for _, g := range games {
+		go func(g *game.Game) {
+			defer wg.Done()
+			g.Play()
+		}(g)
+	}
+
+	wg.Wait()
 }

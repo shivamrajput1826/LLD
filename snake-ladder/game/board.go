@@ -33,7 +33,7 @@ func (b *Board) Initialize() {
 func (b *Board) InitializeSnakes() {
 	b.Grid[55].SnakePos = &Position{FinalPos: 10}
 
-	b.Grid[99].SnakePos = &Position{FinalPos: 7}
+	b.Grid[98].SnakePos = &Position{FinalPos: 7}
 
 	b.Grid[70].SnakePos = &Position{FinalPos: 33}
 
