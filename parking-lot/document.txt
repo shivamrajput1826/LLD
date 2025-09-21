@@ -1,0 +1,11 @@
+
+The parking lot should have multiple levels, each level with a certain number of parking spots.
+The parking lot should support different types of vehicles, such as cars, motorcycles, and trucks. => factory pattern 
+Each parking spot should be able to accommodate a specific type of vehicle.
+=> spot factory
+The system should assign a parking spot to a vehicle upon entry and release it when the vehicle exits. => 
+=> there should be some service which assign and check things 
+The system should track the availability of parking spots and provide real-time information to customers.
+=> some kind of availability tracker
+The system should handle multiple entry and exit points and support concurrent access.
+=> here we are talking about something concurrent access
