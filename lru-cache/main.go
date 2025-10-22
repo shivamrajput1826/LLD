@@ -91,7 +91,7 @@ func (c *LRUCache[K, V]) Put(key K, value V) {
 	}
 	c.cache[key] = newNode
 	c.addToHead(newNode)
-	if c.Size() > c.capacity {
+	if len(c.cache) > c.capacity {
 		tail := c.removeTail()
 		delete(c.cache, tail.key)
 
